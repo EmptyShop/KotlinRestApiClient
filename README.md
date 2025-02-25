@@ -60,6 +60,7 @@ RecyclerView y conteniendo elementos CardView.
         @Path("id") id: Int
     ): Response<APIResponse>
     ```
+  - La clase `APIResponse` la utilizó para recibir la respuesta JSON de la API para los métodos PUT y DELETE.
   
   - En la implementación de la clase MainActivity tengo una variable `binding` que contendrá el layout de `activity_main.xml`. También tengo la variable `adaptador` que es la instancia de la clase `ContactoAdapter`. Tengo además, un arreglo para almacenar la lista de contactos, `listaContactos`. 
 
@@ -70,15 +71,16 @@ RecyclerView y conteniendo elementos CardView.
     * El método `editarContacto` llena los campos de texto con los del contacto seleccionado por el botón `btnEditar` de cada elemento de contacto.
     
 ## La ayuda que utilicé:
-Para este proyecto encontré en internet los siguientes recursos que me parecieron los más confiables y útiles:
+Para este proyecto me basé principalmente en un video que muestra cómo consumir servicios Restfull con Retrofit y Kotlin. Yo lo adapté a mi propia API y además me apoyé en información complementaria:
 
-  * [¿Cómo leer el código QR usando la biblioteca ZXing en Android?](https://es.acervolima.com/como-leer-el-codigo-qr-usando-la-biblioteca-zxing-en-android/)
+  * [CRUD usando MySQL, Express.js, Retrofit, Kotlin y Android Studio Parte 2](https://www.youtube.com/watch?v=lUN0Ge6atz4)
   
-  * [La documentación oficial de Code Scanner](https://github.com/yuriy-budiyev/code-scanner)
+  * [Coroutines | Documentación de Kotlin](https://kotlinlang.org/docs/coroutines-overview.html#documentation)
 
-  * [Zxing – Leer QR y códigos de barras en Kotlin](https://cursokotlin.com/zxing-leer-qr-codigos-de-barras-en-kotlin/)
+  * [Gradle Scripts, Dependencies, Retrofit & Coroutine](https://medium.com/@sruthicsankar/gradle-scripts-dependencies-retrofit-coroutine-in-android-development-7221d0af234a)
+  * [Extract Data From JSON Array using Retrofit Library](https://www.geeksforgeeks.org/android-extract-data-from-json-array-using-retrofit-library-with-kotlin/)
 
 # Lo que sigue
-El alcance de este proyecto sólo es la comparación de ambas librerías así que no tengo mucho más qué agregar. Tal vez darle una vista más atractiva y jugar con las propiedades y atributos de cada librería.
+El alcance de este proyecto es comparar el desempeño y las implementaciones de cada versión de app cliente para consumo de servicios Restfull que tengo en este repositorio (Angular, React, Vue y Kotlin).
 
 Siéntete libre de comentar y sugerir cosas para esta app.
