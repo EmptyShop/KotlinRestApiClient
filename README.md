@@ -1,7 +1,7 @@
 # KotlinRestApiClient
 Cliente de API Rest (Retrofit2)
 
-Este proyecto lo hice como parte de un conjunto de aplicaciones que consumen una API creada en Python para las operaciones básicas (CRUD) de una lista de contactos.
+Este proyecto lo hice como parte de un conjunto de aplicaciones que consumen una API que programé en Python para las operaciones básicas (CRUD) de una lista de contactos: [Contact List App](https://github.com/EmptyShop/FlaskSqlAlchemyApp).
 Esta app (KotlinRestApiClient) es un cliente para Android, codificada en Kotlin y uso Retrofit2 para consumir los servicios Restfull.
 La app contiene 3 campos de texto correspondientes a nombre, email y teléfono. Además contiene la lista de contactos registrados en un control
 RecyclerView y conteniendo elementos CardView.
@@ -25,13 +25,18 @@ RecyclerView y conteniendo elementos CardView.
     ```sh
     <uses-permission android:name="android.permission.INTERNET" />
     ```
+    Y además agregué la siguiente propiedad al tag `<application>`:
+
+    ```sh
+    android:usesCleartextTraffic="true"
+    ```
 
   - El modelo de datos está contenido en la clase `Contacto`.
   
   - El layout de la app contiene 2 archivos XML:
     * `activity_main.xml`, el cual contiene los campos para editar cada contacto y el contenedor del RecyclerView.
     * `item_rv_contacto.xml`, que contiene la distribución de la información de cada contacto y los botones para editar y eliminar.
-  - Para utilizar el RecyclerView implementé la clase `ContactoAdapter` la cual vincula el layout creado en `item_rv_contacto.xml` con la clase `Contacto` y define los métodos necesarios para canfigurar el funcionamiento de cada item de `CardView`.
+  - Para utilizar el RecyclerView implementé la clase `ContactoAdapter` la cual vincula el layout creado en `item_rv_contacto.xml` con la clase `Contacto` y define los métodos necesarios para configurar el funcionamiento de cada item de `CardView`.
 
   - Para manejar las llamadas a la API Rest generé la interfaz `RestService`. Aquí usé las clases y métodos de Retrofit. También está declarada una constante (`BASE_URL`) con la ruta de la API. De acuerdo a los parámetros de entrada y salida solicitados por la API, esta fue mi implementación de los métodos:
     
@@ -60,9 +65,9 @@ RecyclerView y conteniendo elementos CardView.
         @Path("id") id: Int
     ): Response<APIResponse>
     ```
-  - La clase `APIResponse` la utilizó para recibir la respuesta JSON de la API para los métodos PUT y DELETE.
+  - La clase `APIResponse` la utilizo para recibir la respuesta JSON de la API para los métodos PUT y DELETE.
   
-  - En la implementación de la clase MainActivity tengo una variable `binding` que contendrá el layout de `activity_main.xml`. También tengo la variable `adaptador` que es la instancia de la clase `ContactoAdapter`. Tengo además, un arreglo para almacenar la lista de contactos, `listaContactos`. 
+  - En la implementación de la clase MainActivity tengo una variable `binding` que contiene el layout de `activity_main.xml`. También tengo la variable `adaptador` que es la instancia de la clase `ContactoAdapter`. Tengo además, un arreglo para almacenar la lista de contactos, `listaContactos`. 
 
     * El método `obtenerContactos` solicita a la API, usando corrutinas, la lista completa de contactos y la almacena en el arreglo `listaContactos`.
     * El método `setUpRecyclerView` actualiza este control con la lista completa de contactos, por lo que es invocada cuando se realiza alguna operación sobre los datos.
@@ -81,6 +86,6 @@ Para este proyecto me basé principalmente en un video que muestra cómo consumi
   * [Extract Data From JSON Array using Retrofit Library](https://www.geeksforgeeks.org/android-extract-data-from-json-array-using-retrofit-library-with-kotlin/)
 
 # Lo que sigue
-El alcance de este proyecto es comparar el desempeño y las implementaciones de cada versión de app cliente para consumo de servicios Restfull que tengo en este repositorio (Angular, React, Vue y Kotlin).
+El alcance de este proyecto es comparar el desempeño y las implementaciones de cada versión de app cliente para consumo de servicios Restfull que tengo en este repositorio ([Angular](https://github.com/EmptyShop/AngularRestApiClient), [React](https://github.com/EmptyShop/ReactRestApiClient), [Vue](https://github.com/EmptyShop/VueRestApiClient) y Kotlin). Por lo que no tengo planeado agregar o modificar funcionalidades.
 
 Siéntete libre de comentar y sugerir cosas para esta app.
