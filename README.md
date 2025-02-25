@@ -24,100 +24,50 @@ RecyclerView y conteniendo elementos CardView.
   
     ```sh
     <uses-permission android:name="android.permission.INTERNET" />
-    ```  
-  - En la implementación de la clase MainActivity usamos esta referencia para ZXing:
-    
-    ```sh
-    import com.google.zxing.integration.android.IntentIntegrator
     ```
-    
-  - Con Code Scanner incializamos algunas cosas:
+
+  - El modelo de datos está contenido en la clase `Contacto`.
   
-    ```sh
-    val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
+  - El layout de la app contiene 2 archivos XML:
+    * `activity_main.xml`, el cual contiene los campos para editar cada contacto y el contenedor del RecyclerView.
+    * `item_rv_contacto.xml`, que contiene la distribución de la información de cada contacto y los botones para editar y eliminar.
+  - Para utilizar el RecyclerView implementé la clase `ContactoAdapter` la cual vincula el layout creado en `item_rv_contacto.xml` con la clase `Contacto` y define los métodos necesarios para canfigurar el funcionamiento de cada item de `CardView`.
 
-    codeScanner = CodeScanner(this, scannerView)
-
-    // Parameters (default values)
-    codeScanner.camera = CodeScanner.CAMERA_BACK
-    codeScanner.formats = CodeScanner.ALL_FORMATS
-
-    codeScanner.autoFocusMode = AutoFocusMode.SAFE
-    codeScanner.scanMode = ScanMode.SINGLE
-    codeScanner.isAutoFocusEnabled = true
-    codeScanner.isFlashEnabled = false
-
-    scannerView.isVisible = false
-    ```
-        
-  - Agregamos callbacks de decodificación y error para Code Scanner:
-
-    ```sh
-    // Callbacks
-    codeScanner.decodeCallback = DecodeCallback {
-        runOnUiThread{
-            scannerView.isVisible = false
-            messageText.text = it.text
-            messageFormat.text = it.barcodeFormat.toString()
-        }
-    }
-
-    codeScanner.errorCallback = ErrorCallback {
-        runOnUiThread{
-            Toast.makeText(this, "Camera Initialization error: ${it.message}",
-                Toast.LENGTH_LONG).show()
-            messageText.text = String()
-            messageFormat.text = String()
-            scannerView.isVisible = false
-        }
-    }
-    ```
-    
-    En el código, `messageText` es el TextView para obtener el texto del código QR; `messageFormat` es el Text View para obtener el formato del código.
-
-  - En el caso de ZXing, hice la implementación de su funcionalidad en el evento `onClick` del botón `scanBtnZXing`:
-
-    ```sh
-    // adding listener to the button for ZXing
-    scanBtnZXing.setOnClickListener(this)
-
-    override fun onClick(v: View?) {
-        // we need to create the object
-        // of IntentIntegrator class
-        // which is the class of ZXing QR library
-        val intentIntegrator = IntentIntegrator(this)
-        intentIntegrator.setPrompt("Scan a barcode or QR Code")
-        intentIntegrator.setOrientationLocked(true)
-        intentIntegrator.initiateScan()
-    }
-    ```
-
-    Eso anterior fue para iniciar la captura del código. Para procesar el resultado lo hice en este método:
+  - Para manejar las llamadas a la API Rest generé la interfaz `RestService`. Aquí usé las clases y métodos de Retrofit. También está declarada una constante (`BASE_URL`) con la ruta de la API. De acuerdo a los parámetros de entrada y salida solicitados por la API, esta fue mi implementación de los métodos:
     
     ```sh
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        val intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        // if the intentResult is null then
-        // toast a message as "cancelled"
-        if (intentResult != null){
-            if (intentResult.contents.isNullOrEmpty()){
-                Toast.makeText(baseContext, "Cancelled", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                // if the intentResult is not null we'll set
-                // the content and format of scan message
-                messageText.text = intentResult.contents
-                messageFormat.text = intentResult.formatName
-            }
-        }
-        else{
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
+    @GET("/contact")
+    suspend fun obtenerContactos(): Response<ArrayList<Contacto>>
+
+    @GET("/contact/{id}")
+    suspend fun obtenerContacto(
+        @Path("id") id: Int
+    ): Response<Contacto>
+
+    @POST("/contact")
+    suspend fun agregarContacto(
+        @Body contacto: Contacto
+    ): Response<Contacto>
+
+    @PUT("/contact/{id}")
+    suspend fun actualizarContacto(
+        @Path("id") id: Int,
+        @Body contacto: Contacto
+    ): Response<APIResponse>
+
+    @DELETE("/contact/{id}")
+    suspend fun eliminarContacto(
+        @Path("id") id: Int
+    ): Response<APIResponse>
     ```
-     
-    Aquí uso el intent que creé en el evento `onClick`. Tomo los datos devueltos usando el método `parseActivityResult` y los asigno a los TextViews de formato y texto.
+  
+  - En la implementación de la clase MainActivity tengo una variable `binding` que contendrá el layout de `activity_main.xml`. También tengo la variable `adaptador` que es la instancia de la clase `ContactoAdapter`. Tengo además, un arreglo para almacenar la lista de contactos, `listaContactos`. 
+
+    * El método `obtenerContactos` solicita a la API, usando corrutinas, la lista completa de contactos y la almacena en el arreglo `listaContactos`.
+    * El método `setUpRecyclerView` actualiza este control con la lista completa de contactos, por lo que es invocada cuando se realiza alguna operación sobre los datos.
+    * El método `agregarContacto` envía a la API un nuevo contacto (actualizando el objeto `this.contacto`) con los datos capturados por el usuario.
+    * De forma similar, los métodos `actualizarContacto` y `borrarContacto` usan corrutinas para usar los métodos de la interfaz `RestService` y realizar las operaciones correspondientes.
+    * El método `editarContacto` llena los campos de texto con los del contacto seleccionado por el botón `btnEditar` de cada elemento de contacto.
     
 ## La ayuda que utilicé:
 Para este proyecto encontré en internet los siguientes recursos que me parecieron los más confiables y útiles:
