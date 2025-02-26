@@ -13,38 +13,38 @@
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:orientation="vertical">
-        
+
         <TextView
             android:id="@+id/tvId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="1"
             android:padding="5dp"
-            android:gravity="center"
-            android:hint="1" />
-        
+            android:textAlignment="textStart" />
+
         <TextView
             android:id="@+id/tvFullname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Nombre"
             android:padding="5dp"
-            android:gravity="center"
-            android:hint="Nombre" />
+            android:textAlignment="textStart" />
 
         <TextView
             android:id="@+id/tvEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Email"
             android:padding="5dp"
-            android:gravity="center"
-            android:hint="Email" />
+            android:textAlignment="textStart" />
 
         <TextView
             android:id="@+id/tvPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Teléfono"
             android:padding="5dp"
-            android:layout_gravity="center"
-            android:hint="Teléfono" />
+            android:textAlignment="textStart" />
 
         <LinearLayout
             android:layout_width="wrap_content"

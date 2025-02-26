@@ -9,14 +9,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         android:orientation="vertical">
         
         <EditText
             android:id="@+id/etFullname"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
             android:hint="@string/fullname_hint"
             android:inputType="text"/>
@@ -37,14 +37,21 @@
             android:hint="@string/phone_hint"
             android:inputType="phone" />
 
+        <Button
+            android:id="@+id/btnAddUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agregar Contacto"
+            android:backgroundTint="@color/green" />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvUsuarios"
+        android:id="@+id/rvContactos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
         android:padding="10dp"
-        tools:listitem="@layout/item_rv_usuario" />
+        tools:listitem="@layout/item_rv_contacto" />
 
 </LinearLayout>
