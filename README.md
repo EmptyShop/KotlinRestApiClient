@@ -76,7 +76,7 @@ RecyclerView y conteniendo elementos CardView.
     * El método `editarContacto` llena los campos de texto con los del contacto seleccionado por el botón `btnEditar` de cada elemento de contacto.
     
 ## La ayuda que utilicé:
-Para este proyecto me basé principalmente en un video que muestra cómo consumir servicios Restfull con Retrofit y Kotlin. Yo lo adapté a mi propia API y además me apoyé en información complementaria:
+Para este proyecto me basé principalmente en un video que muestra cómo consumir servicios Restful con Retrofit y Kotlin. Yo lo adapté a mi propia API y además me apoyé en información complementaria:
 
   * [CRUD usando MySQL, Express.js, Retrofit, Kotlin y Android Studio Parte 2](https://www.youtube.com/watch?v=lUN0Ge6atz4)
   
