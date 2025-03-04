@@ -86,6 +86,6 @@ Para este proyecto me basé principalmente en un video que muestra cómo consumi
   * [Extract Data From JSON Array using Retrofit Library](https://www.geeksforgeeks.org/android-extract-data-from-json-array-using-retrofit-library-with-kotlin/)
 
 # Lo que sigue
-El alcance de este proyecto es comparar el desempeño y las implementaciones de cada versión de app cliente para consumo de servicios Restfull que tengo en este repositorio ([Angular](https://github.com/EmptyShop/AngularRestApiClient), [React](https://github.com/EmptyShop/ReactRestApiClient), [Vue](https://github.com/EmptyShop/VueRestApiClient) y Kotlin). Por lo que no tengo planeado agregar o modificar funcionalidades.
+El alcance de este proyecto es comparar el desempeño y las implementaciones de cada versión de app cliente para consumo de servicios Restful que tengo en este repositorio ([Angular](https://github.com/EmptyShop/AngularRestApiClient), [React](https://github.com/EmptyShop/ReactRestApiClient), [Vue](https://github.com/EmptyShop/VueRestApiClient) y Kotlin). Por lo que no tengo planeado agregar o modificar funcionalidades.
 
 Siéntete libre de comentar y sugerir cosas para esta app.
